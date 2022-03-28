@@ -1,1 +1,1 @@
-# git-it-done
+# GIT IT DONE Project

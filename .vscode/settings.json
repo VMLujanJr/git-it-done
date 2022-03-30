@@ -1,3 +1,5 @@
 {
-    "liveServer.settings.multiRootWorkspaceName": "git-it-done"
+    "liveServer.settings.multiRootWorkspaceName": "git-it-done",
+/*     "workbench.editor.showTabs": true,
+    "workbench.editor.enablePreview": true */
 }

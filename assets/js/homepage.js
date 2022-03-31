@@ -98,8 +98,34 @@ var displayRepos = function (repos, searchTerm) { // accept both the array of re
     }    
 };
 
+var getFeaturedRepos = function (language) {
+    var apiLanguage = ("https://api.github.com/search/repositories?q=" + language + "+is:featured&sort=help-wanted-issues");
+
+    fetch(apiLanguage).then(function(response){
+        if (response.ok) {
+            response.json().then(function(data) {
+                displayRepos(data.items, language);
+            });
+        }
+        else {
+            alert("Error: GitHub User Not Found");
+        }
+    });
+};
+
+var buttonClickHandler = function(event) {
+    var language = event.target.getAttribute("data-language");
+    
+    if (language) {
+        getFeaturedRepos(language);
+
+        // clear old content
+        repoContainerEl.textContent = "";
+    }
+};
+
 // ******************************************************************************
-// Variables & Arrays
+// Variables & Arrays, Referencing Area
 // ******************************************************************************
 /* Referencing Area */
 var userFormEl = document.querySelector("#user-form");
@@ -108,8 +134,10 @@ var nameInputEl = document.querySelector("#username");
 var repoSearchTermEl = document.querySelector("#repo-search-term");
 var repoContainerEl = document.querySelector("#repos-container");
 
-userFormEl.addEventListener("submit", formSubmitHandler);
+var languageButtonsEl = document.querySelector("#language-buttons");
 
+userFormEl.addEventListener("submit", formSubmitHandler);
+languageButtonsEl.addEventListener("click", buttonClickHandler);
 //1 allow users to search for any github account
 //done
 
